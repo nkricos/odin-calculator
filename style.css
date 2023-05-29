@@ -1,1 +1,12 @@
 /* CSS sytlesheet for odin-calculator */
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#calculator {
+    height: 500px;
+    width: 400px;
+    border-style: solid;
+}
