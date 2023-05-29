@@ -1,4 +1,8 @@
 //js code for odin-calulator
+let firstNumber;
+let operator;
+let secondNumber;
+
 function add (a, b) {
     return a + b;
 }
