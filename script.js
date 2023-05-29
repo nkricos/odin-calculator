@@ -2,26 +2,30 @@
 let firstNumber;
 let operator;
 let secondNumber;
-let displayValue = '0';
+let displayText = '0';
 
 const displayOutput = document.querySelector('#display');
-displayOutput.textContent = displayValue;
+displayOutput.textContent = displayText;
 
 const numberButtons = document.querySelectorAll('.numberButton');
+const clearButton = document.querySelector('#clear');
 
 numberButtons.forEach((button) => {
-    button.addEventListener('click', () => assignNumber(displayValue, button.textContent))
+    button.addEventListener('click', () => assignNumber(displayText, button.textContent))
 });
 
-//const pressOne = document.querySelector('#one');
-//pressOne.addEventListener('click', () => assignNumber(displayValue, '1'))
+clearButton.addEventListener('click', () => fullClear());
 
-updateDisplay(displayValue);
+updateDisplay(displayText);
+
+function fullClear() {
+    updateDisplay('0');
+}
 
 function updateDisplay (display) {
     displayOutput.textContent = display;
-    displayValue = display;
-    return displayValue;
+    displayText = display;
+    return displayText;
 }
 
 function assignNumber(display, number) {
