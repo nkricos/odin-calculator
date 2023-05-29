@@ -7,8 +7,14 @@ let displayValue = '0';
 const displayOutput = document.querySelector('#display');
 displayOutput.textContent = displayValue;
 
-const pressOne = document.querySelector('#one');
-pressOne.addEventListener('click', () => assignNumber(displayValue, '1'))
+const numberButtons = document.querySelectorAll('.numberButton');
+
+numberButtons.forEach((button) => {
+    button.addEventListener('click', () => assignNumber(displayValue, button.textContent))
+});
+
+//const pressOne = document.querySelector('#one');
+//pressOne.addEventListener('click', () => assignNumber(displayValue, '1'))
 
 updateDisplay(displayValue);
 
@@ -18,10 +24,10 @@ function updateDisplay (display) {
     return displayValue;
 }
 
-
-
 function assignNumber(display, number) {
-    if (display == '0') {
+    if (display.length >= 8) {
+        return 0;
+    }else if (display == '0') {
         display = number;
     } else {
         display += number;
