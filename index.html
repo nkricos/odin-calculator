@@ -5,11 +5,40 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-    <title>Document</title>
+    <title>odin-calculator</title>
 </head>
 <body>
     <div id="header"><h1>odin-calculator</h1></div>
-    <div id="calculator"></div>
+    <div id="calculator">
+        <div id="display">12345678</div>
+        <div class="buttonRow">
+            <button id="clear" class="secondaryButton">ce/c</button>
+        </div>
+        <div class="buttonRow">
+            <button id="seven" class="primaryButton">7</button>
+            <button id="eight" class="primaryButton">8</button>
+            <button id="nine" class="primaryButton">9</button>
+            <button id="divide" class="secondaryButton">&divide</button>
+        </div>
+        <div class="buttonRow">
+            <button id="four" class="primaryButton">4</button>
+            <button id="five" class="primaryButton">5</button>
+            <button id="six" class="primaryButton">6</button>
+            <button id="multiply" class="secondaryButton">x</button>
+        </div>
+        <div class="buttonRow">
+            <button id="one" class="primaryButton">1</button>
+            <button id="two" class="primaryButton">2</button>
+            <button id="three" class="primaryButton">3</button>
+            <button id="subtract" class="secondaryButton">-</button>
+        </div>
+        <div class="buttonRow">
+            <button id="zero" class="primaryButton">0</button>
+            <span class="buttonSpacer"></span>
+            <button id="equals" class="primaryButton">=</button>
+            <button id="add" class="secondaryButton">+</button>
+        </div>
+    </div>
     <div id="footer"></div>
     <script src="script.js"></script>
 </body>
