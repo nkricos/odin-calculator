@@ -4,19 +4,40 @@ let operator;
 let secondNumber;
 let displayText = '0';
 
+let isFirstOperand = true;
+let operatorPressed = false;
+
 const displayOutput = document.querySelector('#display');
 displayOutput.textContent = displayText;
 
 const numberButtons = document.querySelectorAll('.numberButton');
 const clearButton = document.querySelector('#clear');
+const addButton = document.querySelector('#add');
+const subtractButton = document.querySelector('#subtract');
+const multiplyButton = document.querySelector('#multiply');
+const divideButton = document.querySelector('#divide');
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => assignNumber(displayText, button.textContent))
 });
 
 clearButton.addEventListener('click', () => fullClear());
+addButton.addEventListener('click', () => setOperator('+'));
+subtractButton.addEventListener('click', () => setOperator('-'));
+multiplyButton.addEventListener('click', () => setOperator('*'));
+divideButton.addEventListener('click', () => setOperator('/'));
+
+
 
 updateDisplay(displayText);
+
+function setOperator (symbol) {
+    if (!operatorPressed) {
+        isFirstOperand = !isFirstOperand;
+        operatorPressed = !operatorPressed;
+        return operator = symbol;
+    }else return;
+}
 
 function fullClear() {
     updateDisplay('0');
@@ -37,6 +58,11 @@ function assignNumber(display, number) {
         display += number;
     }  
     updateDisplay(display);
+    if (isFirstOperand == true) {
+        return firstNumber = parseFloat(display);
+    }else {
+        return secondNumber = parseFloat(display);
+    }
 }
 
 function operate (num1, operand, num2) {
