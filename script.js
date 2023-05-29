@@ -11,6 +11,7 @@ const displayOutput = document.querySelector('#display');
 displayOutput.textContent = displayText;
 
 const numberButtons = document.querySelectorAll('.numberButton');
+const operatorButtons = document.querySelectorAll('.operatorButton');
 const clearButton = document.querySelector('#clear');
 const addButton = document.querySelector('#add');
 const subtractButton = document.querySelector('#subtract');
@@ -21,8 +22,13 @@ numberButtons.forEach((button) => {
     button.addEventListener('click', () => assignNumber(displayText, button.textContent))
 });
 
+operatorButtons.forEach((button) => {
+    button.addEventListener('click', () => displayText = '0')
+});
+
 clearButton.addEventListener('click', () => fullClear());
 addButton.addEventListener('click', () => setOperator('+'));
+//addButton.addEventListener('click', () => displayText = '0');
 subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
