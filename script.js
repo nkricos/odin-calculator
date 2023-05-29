@@ -2,10 +2,32 @@
 let firstNumber;
 let operator;
 let secondNumber;
-let displayValue = 12345678;
+let displayValue = '0';
 
 const displayOutput = document.querySelector('#display');
-displayOutput.textContent = `${displayValue}`;
+displayOutput.textContent = displayValue;
+
+const pressOne = document.querySelector('#one');
+pressOne.addEventListener('click', () => assignNumber(displayValue, '1'))
+
+updateDisplay(displayValue);
+
+function updateDisplay (display) {
+    displayOutput.textContent = display;
+    displayValue = display;
+    return displayValue;
+}
+
+
+
+function assignNumber(display, number) {
+    if (display == '0') {
+        display = number;
+    } else {
+        display += number;
+    }  
+    updateDisplay(display);
+}
 
 function operate (num1, operand, num2) {
     switch(operand){
