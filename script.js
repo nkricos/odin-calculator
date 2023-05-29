@@ -2,6 +2,10 @@
 let firstNumber;
 let operator;
 let secondNumber;
+let displayValue = 12345678;
+
+const displayOutput = document.querySelector('#display');
+displayOutput.textContent = `${displayValue}`;
 
 function operate (num1, operand, num2) {
     switch(operand){
