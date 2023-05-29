@@ -19,6 +19,7 @@ body {
     margin: 2px;
     font-weight: bold;
     font-size: large;
+    border-radius: 8px;
 }
 
 .primaryButton {
@@ -53,9 +54,10 @@ body {
     margin: 8px;
     margin-bottom: 16px;
     text-align: center;
-    font-size: 64px;
+    font-size: 72px;
     line-height: 88px;
     background-color: #d2d4d6;
+    border-radius: 8px;
 }
 
 #footer {
