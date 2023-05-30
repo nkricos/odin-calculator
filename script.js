@@ -16,6 +16,7 @@ const subtractButton = document.querySelector('#subtract');
 const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
 const equalButton = document.querySelector('#equals');
+const decimalButton = document.querySelector('#decimal');
 
 //initialize display
 displayOutput.textContent = displayText;
@@ -49,11 +50,10 @@ function killSwitch() {
 }
 
 function evaluateCurrent(){
-        let newValue = operate(firstNumber, operator, secondNumber);
-        updateDisplay(newValue);
-        firstNumber = newValue;
-        secondNumber = 0;
-        //operator = undefined;   
+    let newValue = operate(firstNumber, operator, secondNumber);
+    updateDisplay(newValue);
+    firstNumber = newValue;
+    secondNumber = 0;  
 }
 
 function printVariables() {
@@ -74,7 +74,6 @@ function setOperator (symbol) {
     if (!operatorPressed) {
         isFirstOperand = false;
         operatorPressed = !operatorPressed;
-        
     }else {evaluateCurrent();}
     return operator = symbol;
 }
@@ -89,34 +88,13 @@ function fullClear() {
 }
 
 function updateDisplay (display) {
-    //let overflow = display.length;
-    //console.log('update display' + overflow);
-    //console.log(typeof display);
-    //console.log(displayText);
-   // if (overflow > 8) {
-        //display = display.toExponential(4);
-        //lockDisplay = true;
-   // }
-  // if (firstNumber.toString().length > 8) {
-   // displayOutput.textContent = display.toExponential(4);
-  // }else {
+    console.log(typeof display);
     displayOutput.textContent = display;
-  // }
-  if(display.toString().length > 8) {
-    console.log('hi, ' + display.length);
-    displayOutput.textContent = display.toExponential(2);};
-    
     console.log(display);
     displayText = display;
-    //return displayText;
 }
 
 function assignNumber(display, number) {
-    //operatorPressed = false;
-    //let checkme = display.length;
-    //console.log('assign number' + checkme);
-    //console.log(typeof checkme);
-    //console.log(displayText);
     if (display.length >= 8) {
         return 0;
     }else if (display == '0' || secondNumber == 0) {
@@ -124,6 +102,7 @@ function assignNumber(display, number) {
     } else {
         display += number;
     }  
+    console.log('decimal? ' + display);
     updateDisplay(display);
     if (isFirstOperand == true) {
         return firstNumber = parseFloat(display);
