@@ -1,7 +1,7 @@
 //js code for odin-calulator
-let firstNumber = 0;
+let firstNumber = undefined;
 let operator;
-let secondNumber = 0;
+let secondNumber = undefined;
 let displayText = '0';
 
 let isFirstOperand = true;
@@ -34,6 +34,12 @@ multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
 
 equalButton.addEventListener('click', () => evaluateCurrent());
+equalButton.addEventListener('click', () => killSwitch());
+
+function killSwitch() {
+    operator = undefined;
+    operatorPressed = false;
+}
 
 function evaluateCurrent(){
    
@@ -41,6 +47,7 @@ function evaluateCurrent(){
         updateDisplay(newValue);
         firstNumber = newValue;
         secondNumber = 0;
+        //operator = undefined;
         
         
     
@@ -62,14 +69,15 @@ function setOperator (symbol) {
     if (!operatorPressed) {
         isFirstOperand = false;
         operatorPressed = !operatorPressed;
-        return operator = symbol;
+        
     }else {evaluateCurrent();}
+    return operator = symbol;
 }
 
 function fullClear() {
     updateDisplay('0');
-    firstNumber = 0;
-    secondNumber = 0;
+    firstNumber = undefined;
+    secondNumber = undefined;
     operator = undefined;
     isFirstOperand = true;
     operatorPressed = false;
@@ -82,7 +90,7 @@ function updateDisplay (display) {
 }
 
 function assignNumber(display, number) {
-    operatorPressed = false;
+    //operatorPressed = false;
     if (display.length >= 8) {
         return 0;
     }else if (display == '0' || secondNumber == 0) {
