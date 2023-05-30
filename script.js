@@ -17,6 +17,7 @@ const addButton = document.querySelector('#add');
 const subtractButton = document.querySelector('#subtract');
 const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
+const equalButton = document.querySelector('#equals');
 
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => assignNumber(displayText, button.textContent))
@@ -28,10 +29,22 @@ operatorButtons.forEach((button) => {
 
 clearButton.addEventListener('click', () => fullClear());
 addButton.addEventListener('click', () => setOperator('+'));
-//addButton.addEventListener('click', () => displayText = '0');
 subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
+
+equalButton.addEventListener('click', () => evaluateCurrent(operatorPressed));
+
+function evaluateCurrent(check){
+    if(check = false) {
+        return 0;
+    }else{
+        let newValue = operate(firstNumber, operator, secondNumber);
+        updateDisplay(newValue);
+        firstNumber = newValue;
+        operatorPressed = false;
+    }
+}
 
 
 
@@ -42,11 +55,15 @@ function setOperator (symbol) {
         isFirstOperand = !isFirstOperand;
         operatorPressed = !operatorPressed;
         return operator = symbol;
-    }else return;
+    }else {evaluateCurrent(operatorPressed);}
 }
 
 function fullClear() {
     updateDisplay('0');
+    firstNumber = 0;
+    secondNumber = 0;
+    isFirstOperand = true;
+    operatorPressed = false;
 }
 
 function updateDisplay (display) {
