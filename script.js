@@ -1,10 +1,11 @@
 //initialize variables
-let firstNumber = undefined;
+let firstNumber = 0;
 let operator;
 let secondNumber = undefined;
 let displayText = '0';
 let isFirstOperand = true;
 let operatorPressed = false;
+let lockDisplay = false;
 
 const displayOutput = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.numberButton');
@@ -48,15 +49,11 @@ function killSwitch() {
 }
 
 function evaluateCurrent(){
-   
         let newValue = operate(firstNumber, operator, secondNumber);
         updateDisplay(newValue);
         firstNumber = newValue;
         secondNumber = 0;
-        //operator = undefined;
-        
-        
-    
+        //operator = undefined;   
 }
 
 function printVariables() {
@@ -67,7 +64,9 @@ function printVariables() {
     console.log(`operator: ${operator}`);
 }
 
-
+function convertToSN() {
+    console.log(firstNumber.toExponential(4));
+}
 
 updateDisplay(displayText);
 
@@ -90,13 +89,34 @@ function fullClear() {
 }
 
 function updateDisplay (display) {
+    //let overflow = display.length;
+    //console.log('update display' + overflow);
+    //console.log(typeof display);
+    //console.log(displayText);
+   // if (overflow > 8) {
+        //display = display.toExponential(4);
+        //lockDisplay = true;
+   // }
+  // if (firstNumber.toString().length > 8) {
+   // displayOutput.textContent = display.toExponential(4);
+  // }else {
     displayOutput.textContent = display;
+  // }
+  if(display.toString().length > 8) {
+    console.log('hi, ' + display.length);
+    displayOutput.textContent = display.toExponential(2);};
+    
+    console.log(display);
     displayText = display;
-    return displayText;
+    //return displayText;
 }
 
 function assignNumber(display, number) {
     //operatorPressed = false;
+    //let checkme = display.length;
+    //console.log('assign number' + checkme);
+    //console.log(typeof checkme);
+    //console.log(displayText);
     if (display.length >= 8) {
         return 0;
     }else if (display == '0' || secondNumber == 0) {
