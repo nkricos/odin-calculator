@@ -1,15 +1,12 @@
-//js code for odin-calulator
+//initialize variables
 let firstNumber = undefined;
 let operator;
 let secondNumber = undefined;
 let displayText = '0';
-
 let isFirstOperand = true;
 let operatorPressed = false;
 
 const displayOutput = document.querySelector('#display');
-displayOutput.textContent = displayText;
-
 const numberButtons = document.querySelectorAll('.numberButton');
 const operatorButtons = document.querySelectorAll('.operatorButton');
 const clearButton = document.querySelector('#clear');
@@ -19,6 +16,10 @@ const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
 const equalButton = document.querySelector('#equals');
 
+//initialize display
+displayOutput.textContent = displayText;
+
+//add event listeners to buttons
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => assignNumber(displayText, button.textContent))
 });
@@ -32,9 +33,14 @@ addButton.addEventListener('click', () => setOperator('+'));
 subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
+equalButton.addEventListener('click', () => equalPressed());
 
-equalButton.addEventListener('click', () => evaluateCurrent());
-equalButton.addEventListener('click', () => killSwitch());
+function equalPressed() {
+    if (operatorPressed == true) {
+        evaluateCurrent();
+        killSwitch();
+    }
+}
 
 function killSwitch() {
     operator = undefined;
