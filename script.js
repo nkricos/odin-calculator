@@ -1,7 +1,7 @@
 //js code for odin-calulator
-let firstNumber;
+let firstNumber = 0;
 let operator;
-let secondNumber;
+let secondNumber = 0;
 let displayText = '0';
 
 let isFirstOperand = true;
@@ -33,17 +33,25 @@ subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
 
-equalButton.addEventListener('click', () => evaluateCurrent(operatorPressed));
+equalButton.addEventListener('click', () => evaluateCurrent());
 
-function evaluateCurrent(check){
-    if(check = false) {
-        return 0;
-    }else{
+function evaluateCurrent(){
+   
         let newValue = operate(firstNumber, operator, secondNumber);
         updateDisplay(newValue);
         firstNumber = newValue;
-        operatorPressed = false;
-    }
+        secondNumber = 0;
+        
+        
+    
+}
+
+function printVariables() {
+    console.log(`isFirstOperand: ${isFirstOperand}`);
+    console.log(`firstNumber: ${firstNumber}`);
+    console.log(`secondNumber: ${secondNumber}`);
+    console.log(`operatorPressed: ${operatorPressed}`);
+    console.log(`operator: ${operator}`);
 }
 
 
@@ -52,16 +60,17 @@ updateDisplay(displayText);
 
 function setOperator (symbol) {
     if (!operatorPressed) {
-        isFirstOperand = !isFirstOperand;
+        isFirstOperand = false;
         operatorPressed = !operatorPressed;
         return operator = symbol;
-    }else {evaluateCurrent(operatorPressed);}
+    }else {evaluateCurrent();}
 }
 
 function fullClear() {
     updateDisplay('0');
     firstNumber = 0;
     secondNumber = 0;
+    operator = undefined;
     isFirstOperand = true;
     operatorPressed = false;
 }
@@ -73,9 +82,10 @@ function updateDisplay (display) {
 }
 
 function assignNumber(display, number) {
+    operatorPressed = false;
     if (display.length >= 8) {
         return 0;
-    }else if (display == '0') {
+    }else if (display == '0' || secondNumber == 0) {
         display = number;
     } else {
         display += number;
