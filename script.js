@@ -1,11 +1,8 @@
 //initialize variables
-let firstNumber = 0;
-let operator;
-let secondNumber = undefined;
+let currentNumber = 0;
+let operator ='';
+let displayNumber = 0;
 let displayText = '0';
-let isFirstOperand = true;
-let operatorPressed = false;
-let lockDisplay = false;
 
 const displayOutput = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.numberButton');
@@ -23,11 +20,7 @@ displayOutput.textContent = displayText;
 
 //add event listeners to buttons
 numberButtons.forEach((button) => {
-    button.addEventListener('click', () => assignNumber(displayText, button.textContent))
-});
-
-operatorButtons.forEach((button) => {
-    button.addEventListener('click', () => displayText = '0')
+    button.addEventListener('click', () => assignNumber(button.textContent))
 });
 
 clearButton.addEventListener('click', () => fullClear());
@@ -35,80 +28,51 @@ addButton.addEventListener('click', () => setOperator('+'));
 subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
-equalButton.addEventListener('click', () => equalPressed());
+equalButton.addEventListener('click', () => solve());
 
-function equalPressed() {
-    if (operatorPressed == true) {
-        evaluateCurrent();
-        killSwitch();
-    }
+function solve() {
+    currentNumber = operate(currentNumber, operator, displayNumber);
+    displayNumber = currentNumber;
+    operator = '';
+    displayOutput.textContent = filterDisplay(currentNumber);
 }
 
-function killSwitch() {
-    operator = undefined;
-    operatorPressed = false;
+function filterDisplay(currentNumber) {
+    let filteredString = currentNumber.toString();
+    //filter string
+    return filteredString;
 }
-
-function evaluateCurrent(){
-    let newValue = operate(firstNumber, operator, secondNumber);
-    updateDisplay(newValue);
-    firstNumber = newValue;
-    secondNumber = 0;  
-}
-
-function printVariables() {
-    console.log(`isFirstOperand: ${isFirstOperand}`);
-    console.log(`firstNumber: ${firstNumber}`);
-    console.log(`secondNumber: ${secondNumber}`);
-    console.log(`operatorPressed: ${operatorPressed}`);
-    console.log(`operator: ${operator}`);
-}
-
-function convertToSN() {
-    console.log(firstNumber.toExponential(4));
-}
-
-updateDisplay(displayText);
 
 function setOperator (symbol) {
-    if (!operatorPressed) {
-        isFirstOperand = false;
-        operatorPressed = !operatorPressed;
-    }else {evaluateCurrent();}
-    return operator = symbol;
+    if (operator == '') {
+        currentNumber = displayNumber;
+        displayNumber = 0;
+    }else {
+        currentNumber = operate(currentNumber, operator, displayNumber);
+        displayOutput.textContent = filterDisplay(currentNumber);
+        displayNumber = 0;
+    }
+    operator = symbol;
 }
 
 function fullClear() {
-    updateDisplay('0');
-    firstNumber = undefined;
-    secondNumber = undefined;
-    operator = undefined;
-    isFirstOperand = true;
-    operatorPressed = false;
+    currentNumber = 0;
+    displayNumber = 0;
+    operator = '';
+    displayOutput.textContent = '0';
 }
 
-function updateDisplay (display) {
-    console.log(typeof display);
-    displayOutput.textContent = display;
-    console.log(display);
-    displayText = display;
-}
-
-function assignNumber(display, number) {
-    if (display.length >= 8) {
+function assignNumber(digit) {
+    let numberLength = displayNumber.toString().length;
+    if (numberLength >= 8) {
         return 0;
-    }else if (display == '0' || secondNumber == 0) {
-        display = number;
+    }else if (displayNumber == 0) {
+        displayOutput.textContent = `${digit}`;
     } else {
-        display += number;
-    }  
-    console.log('decimal? ' + display);
-    updateDisplay(display);
-    if (isFirstOperand == true) {
-        return firstNumber = parseFloat(display);
-    }else {
-        return secondNumber = parseFloat(display);
+        displayText = displayOutput.textContent;
+        displayOutput.textContent = `${displayText}` + `${digit}`;
     }
+    displayNumber = parseFloat(displayOutput.textContent);
 }
 
 function operate (num1, operand, num2) {
