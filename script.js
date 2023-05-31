@@ -1,4 +1,4 @@
-//initialize variables
+//initialize variables - reset values for fullClear function
 let currentNumber = 0;
 let operator ='';
 let displayNumber = 0;
@@ -19,7 +19,6 @@ const decimalButton = document.querySelector('#decimal');
 //initialize display
 displayOutput.textContent = displayText;
 
-//add event listeners to buttons
 numberButtons.forEach((button) => {
     button.addEventListener('click', () => assignNumber(button.textContent))
 });
@@ -58,12 +57,6 @@ function setOperator (symbol) {
         displayNumber = 0;
     }
     operator = symbol;
-    console.log(`currentNumber: ` + currentNumber);
-    console.log(`displayNumer: ` + displayNumber);
-    console.log(`secondNumberEntry: ` + secondNumberEntry);
-    console.log(`operator: ` + operator);
-    console.log(`displayOutput.textContent: `+ displayOutput.textContent);
-    console.log(`displayText: ` + displayText + `\n\n`);
 }
 
 function fullClear() {
@@ -77,11 +70,11 @@ function fullClear() {
 
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
-    if (numberLength >= 8 /*|| (digit == '.' && displayOutput.textContent.includes('.'))*/) {
+    if (numberLength >= 8) {
         return 0;
+    //keep display consistant entering decimal as first digit of an operator regardless of state    
     }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
         displayOutput.textContent = '0.';
-       
         secondNumberEntry = false;
     }else if (displayOutput.textContent == '0' || secondNumberEntry == true) {
         displayOutput.textContent = `${digit}`;
@@ -89,6 +82,7 @@ function assignNumber(digit) {
     } else {
         displayText = displayOutput.textContent;
         displayOutput.textContent = `${displayText}` + `${digit}`;
+        //prevent repeat entering of decimal point
         let decimalCounter = displayOutput.textContent.match(/\./g);
         if (decimalCounter) {
             if (decimalCounter.length > 1) {
@@ -97,12 +91,7 @@ function assignNumber(digit) {
         }
     }
     displayNumber = parseFloat(displayOutput.textContent);
-    console.log(`currentNumber: ` + currentNumber);
-    console.log(`displayNumer: ` + displayNumber);
-    console.log(`secondNumberEntry: ` + secondNumberEntry);
-    console.log(`operator: ` + operator);
-    console.log(`displayOutput.textContent: `+ displayOutput.textContent);
-    console.log(`displayText: ` + displayText + `\n\n`);
+    
 }
 
 function operate (num1, operand, num2) {
