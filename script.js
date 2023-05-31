@@ -31,6 +31,9 @@ divideButton.addEventListener('click', () => setOperator('/'));
 equalButton.addEventListener('click', () => solve());
 
 function solve() {
+    if (operator == '') {
+        return currentNumber = displayNumber;
+    }
     currentNumber = operate(currentNumber, operator, displayNumber);
     displayNumber = currentNumber;
     operator = '';
@@ -64,7 +67,7 @@ function fullClear() {
 
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
-    if (numberLength >= 8) {
+    if (numberLength >= 8 || (digit == '.' && displayOutput.textContent.includes('.'))) {
         return 0;
     }else if (displayNumber == 0) {
         displayOutput.textContent = `${digit}`;
