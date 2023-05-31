@@ -7,7 +7,7 @@ v0.01
 
 2023.05.30 - added decimal button and functionality
 
-TODO:   update display when decimal is placed prior to entering digits (eg. 0.123...)
+TODO:   fix entering 0. after operation
 
 TODO:  refactor overflow of display logic - consider converting to array and running methods pre.post
 when subarrays of pre + post > 7

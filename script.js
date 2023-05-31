@@ -3,6 +3,7 @@ let currentNumber = 0;
 let operator ='';
 let displayNumber = 0;
 let displayText = '0';
+let secondNumberEntry = false;
 
 const displayOutput = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.numberButton');
@@ -50,32 +51,51 @@ function setOperator (symbol) {
     if (operator == '') {
         currentNumber = displayNumber;
         displayNumber = 0;
+        secondNumberEntry = true;
     }else {
         currentNumber = operate(currentNumber, operator, displayNumber);
         displayOutput.textContent = filterDisplay(currentNumber);
         displayNumber = 0;
     }
     operator = symbol;
+    console.log(`currentNumber: ` + currentNumber);
+    console.log(`displayNumer: ` + displayNumber);
+    console.log(`secondNumberEntry: ` + secondNumberEntry);
+    console.log(`operator: ` + operator);
+    console.log(`displayOutput.textContent: `+ displayOutput.textContent);
+    console.log(`displayText: ` + displayText + `\n\n`);
 }
 
 function fullClear() {
     currentNumber = 0;
     displayNumber = 0;
+    displayText = '0'
     operator = '';
     displayOutput.textContent = '0';
+    secondNumberEntry = false;
 }
 
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
-    if (numberLength >= 8 || (digit == '.' && displayOutput.textContent.includes('.'))) {
+    if (numberLength >= 8 /*|| (digit == '.' && displayOutput.textContent.includes('.'))*/) {
         return 0;
-    }else if (displayNumber == 0) {
+    }else if (digit == '.' && ((displayText == '0' && displayNumber == 0) || secondNumberEntry == true)) {
+        displayOutput.textContent = '0.';
+        secondNumberEntry = false;
+    }else if (displayOutput.textContent == '0' || secondNumberEntry == true) {
         displayOutput.textContent = `${digit}`;
+        secondNumberEntry = false;
     } else {
         displayText = displayOutput.textContent;
         displayOutput.textContent = `${displayText}` + `${digit}`;
     }
     displayNumber = parseFloat(displayOutput.textContent);
+    console.log(`currentNumber: ` + currentNumber);
+    console.log(`displayNumer: ` + displayNumber);
+    console.log(`secondNumberEntry: ` + secondNumberEntry);
+    console.log(`operator: ` + operator);
+    console.log(`displayOutput.textContent: `+ displayOutput.textContent);
+    console.log(`displayText: ` + displayText + `\n\n`);
 }
 
 function operate (num1, operand, num2) {
