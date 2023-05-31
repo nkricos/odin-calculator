@@ -79,7 +79,7 @@ function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
     if (numberLength >= 8 /*|| (digit == '.' && displayOutput.textContent.includes('.'))*/) {
         return 0;
-    }else if (digit == '.' && ((displayText == '0' && displayNumber == 0) || secondNumberEntry == true)) {
+    }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
         displayOutput.textContent = '0.';
         secondNumberEntry = false;
     }else if (displayOutput.textContent == '0' || secondNumberEntry == true) {
