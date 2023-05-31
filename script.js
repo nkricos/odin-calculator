@@ -81,6 +81,7 @@ function assignNumber(digit) {
         return 0;
     }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
         displayOutput.textContent = '0.';
+       
         secondNumberEntry = false;
     }else if (displayOutput.textContent == '0' || secondNumberEntry == true) {
         displayOutput.textContent = `${digit}`;
@@ -88,6 +89,12 @@ function assignNumber(digit) {
     } else {
         displayText = displayOutput.textContent;
         displayOutput.textContent = `${displayText}` + `${digit}`;
+        let decimalCounter = displayOutput.textContent.match(/\./g);
+        if (decimalCounter) {
+            if (decimalCounter.length > 1) {
+                displayOutput.textContent = displayOutput.textContent.substring(0, displayOutput.textContent.length - 1);
+            }
+        }
     }
     displayNumber = parseFloat(displayOutput.textContent);
     console.log(`currentNumber: ` + currentNumber);

@@ -7,7 +7,5 @@ v0.01
 
 2023.05.30 - added decimal button and functionality
 
-TODO:  fix repeating decimals
-
 TODO:  refactor overflow of display logic - consider converting to array and running methods pre.post
 when subarrays of pre + post > 7
