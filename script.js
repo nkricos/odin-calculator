@@ -55,6 +55,7 @@ function setOperator (symbol) {
         currentNumber = operate(currentNumber, operator, displayNumber);
         displayOutput.textContent = filterDisplay(currentNumber);
         displayNumber = 0;
+        secondNumberEntry = true;
     }
     operator = symbol;
 }
