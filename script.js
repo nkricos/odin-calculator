@@ -49,14 +49,12 @@ function filterDisplay(currentNumber) {
 function setOperator (symbol) {
     if (operator == '') {
         currentNumber = displayNumber;
-        displayNumber = 0;
-        secondNumberEntry = true;
     }else {
         currentNumber = operate(currentNumber, operator, displayNumber);
-        displayOutput.textContent = filterDisplay(currentNumber);
-        displayNumber = 0;
-        secondNumberEntry = true;
+        displayOutput.textContent = filterDisplay(currentNumber);  
     }
+    displayNumber = 0;
+    secondNumberEntry = true;
     operator = symbol;
 }
 
@@ -71,15 +69,14 @@ function fullClear() {
 
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
+    //prevent overflow of display during data entry
     if (numberLength >= 8) {
         return 0;
     //keep display consistant entering decimal as first digit of an operator regardless of state    
     }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
         displayOutput.textContent = '0.';
-        secondNumberEntry = false;
     }else if (displayOutput.textContent == '0' || secondNumberEntry == true) {
         displayOutput.textContent = `${digit}`;
-        secondNumberEntry = false;
     } else {
         displayText = displayOutput.textContent;
         displayOutput.textContent = `${displayText}` + `${digit}`;
@@ -91,8 +88,8 @@ function assignNumber(digit) {
             }
         }
     }
+    secondNumberEntry = false;
     displayNumber = parseFloat(displayOutput.textContent);
-    
 }
 
 function operate (num1, operand, num2) {
