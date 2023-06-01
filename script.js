@@ -38,17 +38,17 @@ function solve() {
     displayNumber = currentNumber;
     operator = '';
     displayOutput.textContent = filterDisplay(currentNumber);
-    console.log(currentNumber);
 }
 
 function filterDisplay(currentNumber) {
     let isNegative = false;
     let filterString = currentNumber.toString();
     let filterArr = Array.from(String(currentNumber));
-    //console.log(filteredString.length);
-    
+
+    //Err if number too large to fit 8 digit display
     if (currentNumber > 99999999 || currentNumber < -9999999){
         return 'Err';
+    //adjust decimal numbers to fit display
     }else if (filterString.includes('.')) {
         let decimalIndex = filterArr.findIndex( n => n == '.');
         let preDecimal = filterArr.slice(0, decimalIndex);
@@ -56,16 +56,12 @@ function filterDisplay(currentNumber) {
         if (preDecimal[0] == '-') {
             isNegative = true;
             preDecimal.shift();
-            console.log(preDecimal);
         }else isNegative = false
         while (preDecimal.length + postDecimal.length > 7) {
             postDecimal.pop();
-            console.log(postDecimal);
         }
-        console.log(preDecimal);
         let preDecimalDigits = Number(preDecimal.join(''));
         let postDecimalDigits = Number(postDecimal.join(''));
-        console.log(`predif` + preDecimalDigits);
         if (preDecimal.length > 6) {
             return preDecimalDigits;
         }else if (isNegative == true) {
@@ -74,24 +70,7 @@ function filterDisplay(currentNumber) {
         else {
             return preDecimalDigits + '.' + postDecimalDigits;
         }
-
-        console.log(filterArr);
-        console.log(decimalIndex);
-        console.log(preDecimal);
-        console.log(postDecimal);
-        return 'Coming Soon';
     }else return currentNumber;
-   // while (filteredString.length > 8 && filteredString.includes('.')) {
-       // filteredString = filteredString.slice(0, filteredString.length - 1);
-        //console.log(`fil1: ` + filteredString);
-   // }
-    
-   // if (filteredString.length > 8 || filteredString < 0.000001) {
-        //return filteredString = 'Err';
-   // }else return filteredString;
-        
-        //filteredString = 'error';
-        //console.log(`fil2: ` + filteredString);
 }
 
 function setOperator (symbol) {
@@ -104,7 +83,6 @@ function setOperator (symbol) {
     displayNumber = 0;
     secondNumberEntry = true;
     operator = symbol;
-    console.log(currentNumber);
 }
 
 function fullClear() {
@@ -139,7 +117,6 @@ function assignNumber(digit) {
     }
     secondNumberEntry = false;
     displayNumber = parseFloat(displayOutput.textContent);
-    console.log(currentNumber);
 }
 
 function operate (num1, operand, num2) {
