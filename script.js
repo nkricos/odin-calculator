@@ -49,6 +49,8 @@ function filterDisplay(currentNumber) {
     if (currentNumber > 99999999 || currentNumber < -9999999){
         return 'Err';
     //adjust decimal numbers to fit display
+    }else if (filterString.includes('e')) {
+        return 'Err';
     }else if (filterString.includes('.')) {
         let decimalIndex = filterArr.findIndex( n => n == '.');
         let preDecimal = filterArr.slice(0, decimalIndex);
@@ -57,18 +59,24 @@ function filterDisplay(currentNumber) {
             isNegative = true;
             preDecimal.shift();
         }else isNegative = false
-        while (preDecimal.length + postDecimal.length > 7) {
+        while (preDecimal.length + postDecimal.length > 8) {
             postDecimal.pop();
         }
+        if (preDecimal.length + postDecimal.length == 8) {
+            postDecimal.pop()
+        }
+        if (postDecimal.includes(/[^0-9]/g)) {
+            postDecimal = [];
+        }
         let preDecimalDigits = Number(preDecimal.join(''));
-        let postDecimalDigits = Number(postDecimal.join(''));
+        let allDigits = Number(preDecimal.join('') + '.' + postDecimal.join(''));
         if (preDecimal.length > 6) {
             return preDecimalDigits;
         }else if (isNegative == true) {
-            return '-' + preDecimalDigits + '.' + postDecimalDigits;
+            return '-' + allDigits;
         }
         else {
-            return preDecimalDigits + '.' + postDecimalDigits;
+            return allDigits;
         }
     }else return currentNumber;
 }
