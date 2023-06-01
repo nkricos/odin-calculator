@@ -38,12 +38,27 @@ function solve() {
     displayNumber = currentNumber;
     operator = '';
     displayOutput.textContent = filterDisplay(currentNumber);
+    console.log(currentNumber);
 }
 
 function filterDisplay(currentNumber) {
     let filteredString = currentNumber.toString();
-    //filter string
-    return filteredString;
+    //console.log(filteredString.length);
+    
+    if ((currentNumber > 99999999) || currentNumber < -9999999){
+        return 'Err';
+    }else return currentNumber;
+   // while (filteredString.length > 8 && filteredString.includes('.')) {
+       // filteredString = filteredString.slice(0, filteredString.length - 1);
+        //console.log(`fil1: ` + filteredString);
+   // }
+    
+   // if (filteredString.length > 8 || filteredString < 0.000001) {
+        //return filteredString = 'Err';
+   // }else return filteredString;
+        
+        //filteredString = 'error';
+        //console.log(`fil2: ` + filteredString);
 }
 
 function setOperator (symbol) {
@@ -56,6 +71,7 @@ function setOperator (symbol) {
     displayNumber = 0;
     secondNumberEntry = true;
     operator = symbol;
+    console.log(currentNumber);
 }
 
 function fullClear() {
@@ -70,7 +86,7 @@ function fullClear() {
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
     //prevent overflow of display during data entry
-    if (numberLength >= 8) {
+    if (numberLength >= 8 || displayOutput.textContent == 'Err') {
         return 0;
     //keep display consistant entering decimal as first digit of an operator regardless of state    
     }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
@@ -90,6 +106,7 @@ function assignNumber(digit) {
     }
     secondNumberEntry = false;
     displayNumber = parseFloat(displayOutput.textContent);
+    console.log(currentNumber);
 }
 
 function operate (num1, operand, num2) {
