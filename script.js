@@ -42,11 +42,44 @@ function solve() {
 }
 
 function filterDisplay(currentNumber) {
-    let filteredString = currentNumber.toString();
+    let isNegative = false;
+    let filterString = currentNumber.toString();
+    let filterArr = Array.from(String(currentNumber));
     //console.log(filteredString.length);
     
-    if ((currentNumber > 99999999) || currentNumber < -9999999){
+    if (currentNumber > 99999999 || currentNumber < -9999999){
         return 'Err';
+    }else if (filterString.includes('.')) {
+        let decimalIndex = filterArr.findIndex( n => n == '.');
+        let preDecimal = filterArr.slice(0, decimalIndex);
+        let postDecimal = filterArr.slice(decimalIndex + 1);
+        if (preDecimal[0] == '-') {
+            isNegative = true;
+            preDecimal.shift();
+            console.log(preDecimal);
+        }else isNegative = false
+        while (preDecimal.length + postDecimal.length > 7) {
+            postDecimal.pop();
+            console.log(postDecimal);
+        }
+        console.log(preDecimal);
+        let preDecimalDigits = Number(preDecimal.join(''));
+        let postDecimalDigits = Number(postDecimal.join(''));
+        console.log(`predif` + preDecimalDigits);
+        if (preDecimal.length > 6) {
+            return preDecimalDigits;
+        }else if (isNegative == true) {
+            return '-' + preDecimalDigits + '.' + postDecimalDigits;
+        }
+        else {
+            return preDecimalDigits + '.' + postDecimalDigits;
+        }
+
+        console.log(filterArr);
+        console.log(decimalIndex);
+        console.log(preDecimal);
+        console.log(postDecimal);
+        return 'Coming Soon';
     }else return currentNumber;
    // while (filteredString.length > 8 && filteredString.includes('.')) {
        // filteredString = filteredString.slice(0, filteredString.length - 1);
