@@ -5,6 +5,10 @@ let displayNumber = 0;
 let displayText = '0';
 let secondNumberEntry = false;
 
+const maxDsiplay = 8;
+const largestValue = 99999999;
+const smallestValue = -9999999;
+
 const displayOutput = document.querySelector('#display');
 const numberButtons = document.querySelectorAll('.numberButton');
 const operatorButtons = document.querySelectorAll('.operatorButton');
@@ -46,7 +50,7 @@ function filterDisplay(currentNumber) {
     let filterArr = Array.from(String(currentNumber));
 
     //Err if number too large to fit 8 digit display
-    if (currentNumber > 99999999 || currentNumber < -9999999){
+    if (currentNumber > largestValue || currentNumber < smallestValue){
         return 'Err';
     //adjust decimal numbers to fit display
     }else if (filterString.includes('e')) {
@@ -59,10 +63,10 @@ function filterDisplay(currentNumber) {
             isNegative = true;
             preDecimal.shift();
         }else isNegative = false
-        while (preDecimal.length + postDecimal.length > 8) {
+        while (preDecimal.length + postDecimal.length > maxDsiplay) {
             postDecimal.pop();
         }
-        if (preDecimal.length + postDecimal.length == 8) {
+        if (preDecimal.length + postDecimal.length == maxDsiplay) {
             postDecimal.pop()
         }
         if (postDecimal.includes(/[^0-9]/g)) {
@@ -70,7 +74,7 @@ function filterDisplay(currentNumber) {
         }
         let preDecimalDigits = Number(preDecimal.join(''));
         let allDigits = Number(preDecimal.join('') + '.' + postDecimal.join(''));
-        if (preDecimal.length > 6) {
+        if (preDecimal.length > maxDsiplay - 2) {
             return preDecimalDigits;
         }else if (isNegative == true) {
             return '-' + allDigits;
@@ -105,7 +109,7 @@ function fullClear() {
 function assignNumber(digit) {
     let numberLength = displayNumber.toString().length;
     //prevent overflow of display during data entry
-    if (numberLength >= 8 || displayOutput.textContent == 'Err') {
+    if (numberLength >= maxDsiplay || displayOutput.textContent == 'Err') {
         return 0;
     //keep display consistant entering decimal as first digit of an operator regardless of state    
     }else if (digit == '.' && (((displayText == '0' || displayText == '0.') && displayNumber == 0) || secondNumberEntry == true)) {
