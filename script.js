@@ -86,7 +86,9 @@ function filterDisplay(currentNumber) {
 }
 
 function setOperator (symbol) {
-    if (operator == '') {
+    if (secondNumberEntry == true) {
+        return 0;
+    }else if (operator == '') {
         currentNumber = displayNumber;
     }else {
         currentNumber = operate(currentNumber, operator, displayNumber);
