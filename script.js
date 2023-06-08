@@ -36,6 +36,24 @@ divideButton.addEventListener('click', () => setOperator('/'));
 equalButton.addEventListener('click', () => solve());
 backspaceButton.addEventListener('click', () => backSpace());
 
+document.onkeydown = function (e) {
+    let keyPressed = e.key;
+    
+    let digitPattern = /[0-9]/;
+    let operatorPattern = /[+\-*\/]/;
+    if (digitPattern.test(keyPressed)){
+        return assignNumber(keyPressed);
+    }else if (operatorPattern.test(keyPressed)) {
+        return setOperator(keyPressed);
+    }else if (keyPressed == 'Backspace') {
+        return backSpace();
+    }else if (keyPressed == '=' || keyPressed == 'Enter') {
+        return solve();
+    }else if (keyPressed == 'c' || keyPressed == 'Delete') {
+        return fullClear();
+    }else return 0;
+}
+
 function backSpace() {
     if (displayOutput.textContent > 1){
         let backDisplay = displayOutput.textContent.slice(0, displayOutput.textContent.length - 1);
