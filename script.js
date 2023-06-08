@@ -19,6 +19,7 @@ const multiplyButton = document.querySelector('#multiply');
 const divideButton = document.querySelector('#divide');
 const equalButton = document.querySelector('#equals');
 const decimalButton = document.querySelector('#decimal');
+const backspaceButton = document.querySelector('#backspace');
 
 //initialize display
 displayOutput.textContent = displayText;
@@ -33,6 +34,11 @@ subtractButton.addEventListener('click', () => setOperator('-'));
 multiplyButton.addEventListener('click', () => setOperator('*'));
 divideButton.addEventListener('click', () => setOperator('/'));
 equalButton.addEventListener('click', () => solve());
+backspaceButton.addEventListener('click', () => backSpace());
+
+function backSpace() {
+    alert('working');
+}
 
 function solve() {
     if (operator == '') {
