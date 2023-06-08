@@ -37,7 +37,11 @@ equalButton.addEventListener('click', () => solve());
 backspaceButton.addEventListener('click', () => backSpace());
 
 function backSpace() {
-    alert('working');
+    if (displayOutput.textContent > 1){
+        let backDisplay = displayOutput.textContent.slice(0, displayOutput.textContent.length - 1);
+        displayOutput.textContent = backDisplay;
+        displayNumber = parseFloat(displayOutput.textContent);
+    }else displayOutput.textContent = '0';
 }
 
 function solve() {
